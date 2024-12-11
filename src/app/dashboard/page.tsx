@@ -9,24 +9,24 @@ export default function Dashboard() {
         <section className="text-center">
           <h1 className="mb-6 text-4xl font-bold">Dashboard</h1>
         </section>
-        <div className="flex flex-wrap justify-between gap-4">
+        <div className="flex flex-wrap justify-between gap-2">
           <Card
-            icon="fa-box"
+            icon={<i className="fas fa-box"></i>}
             text="R$ 70.093,41 Total"
             subtext="R$ 67.358,74 Produtos"
           />
           <Card
-            icon="fa-shopping-cart"
+            icon={<i className="fas fa-shopping-cart"></i>}
             text="1.123 Pedidos"
             subtext="R$ 62,42 Ticket Médio"
           />
           <Card
-            icon="fa-truck"
+            icon={<i className="fas fa-truck"></i>} 
             text="R$ 3,42 Entrega Média"
             subtext=""
           />
           <Card
-            icon="fa-star"
+            icon={<i className="fas fa-star"></i>}
             text="41 Avaliações"
             subtext="4,8 Nota Média"
           />
