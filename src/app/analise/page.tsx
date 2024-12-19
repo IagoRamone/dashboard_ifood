@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <div className="flex">
       <Sidebar />
-
       <div className="ml-[260px] flex-1 p-6"> 
         <Analise />
       </div>
@@ -22,8 +21,8 @@ function Analise() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
-      setGraphUrl(null); // Limpar gráfico anterior
-      setError(null);    // Limpar erro anterior
+      setGraphUrl(null); 
+      setError(null);    
       console.log("Arquivo selecionado:", e.target.files[0]);
     }
   };
