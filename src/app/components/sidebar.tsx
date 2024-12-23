@@ -17,6 +17,7 @@ export default function Sidebar() {
       <h2 className="mb-6 text-4xl font-semibold">Dashboard Adez</h2>
       <ul className="text-xl">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <li className="rounded p-2 hover:bg-gray-800">
           <i className="bi bi-house mr-2"></i> Home
         </li>
@@ -59,6 +60,8 @@ export default function Sidebar() {
         <li className="rounded p-2 hover:bg-gray-800">
           <i className="bi bi-person mr-2"></i> Conta
 =======
+=======
+>>>>>>> 159384b80de530ac1ccd42dd0ac8421acaf7b902
         <li className="rounded p-2 text-xl hover:bg-gray-800">
           <Link href="/">
               <i className="bi bi-house mr-2 py-10"></i> Home        
@@ -104,7 +107,10 @@ export default function Sidebar() {
           <Link href="/conta">
               <i className="bi bi-person mr-2"></i> Conta
           </Link>
+<<<<<<< HEAD
 >>>>>>> developer
+=======
+>>>>>>> 159384b80de530ac1ccd42dd0ac8421acaf7b902
         </li>
       </ul>
     </aside>

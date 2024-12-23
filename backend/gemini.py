@@ -23,12 +23,22 @@ def gemini_api():
             "contents": [{"parts": [{"text": user_input}]}]
         }
 
+        print(f"Enviando para a API: {request_data}")
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {GEMINI_API_KEY}"
+        }
+
         response = requests.post(
             GEMINI_API_URL,
-            headers={"Content-Type": "application/json"},
-            params={"key": GEMINI_API_KEY},
+            headers=headers,
             json=request_data
         )
+
+        # Log da resposta da API
+        print(f"Status Code: {response.status_code}")
+        print(f"Resposta da API: {response.text}")
 
         if response.status_code != 200:
             error_details = response.json()
@@ -46,7 +56,10 @@ def gemini_api():
         print("Erro no endpoint /gemini:")
         traceback.print_exc()
 
-        return jsonify({"error": "An error occurred", "details": str(e)}), 500
+        return jsonify({
+            "error": "An error occurred",
+            "details": str(e)
+        }), 500
 
 if __name__ == '__main__':
     if GEMINI_API_KEY is None:
