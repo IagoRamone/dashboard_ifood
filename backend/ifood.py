@@ -15,7 +15,6 @@ client_credentials = os.getenv('CLIENT_CREDENTIALS')
 def get_access_token():
     url = 'https://merchant-api.ifood.com.br/authentication/v1.0/oauth/token'
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-    # não alterar ordem 
     data = {
         'grantType': 'client_credentials', 
         'clientId': client_id,              
@@ -47,7 +46,7 @@ def get_reconciliation(merchant_id):
     competence = request.args.get('competence')
     try:
         token = get_access_token()
-        url = f'https://merchant-api.ifood.com.br/merchants/{merchant_id}/reconciliation?competence={competence}'  # Endpoint de reconciliação
+        url = f'https://merchant-api.ifood.com.br/merchants/{merchant_id}/reconciliation?competence={competence}' 
         headers = {
             'Authorization': f'Bearer {token}',
             'Content-Type': 'application/json'
