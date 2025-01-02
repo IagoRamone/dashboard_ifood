@@ -6,7 +6,6 @@ from flask import Flask, jsonify, request
 
 load_dotenv() 
 
-
 app = Flask(__name__)   
 
 client_id = os.getenv('CLIENT_ID')
