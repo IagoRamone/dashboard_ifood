@@ -44,7 +44,6 @@ export default function Home() {
       );
       const reconciliationData: ReconciliationItem[] = response.data;
 
-      // Processando os dados para o gráfico
       const newLabels = reconciliationData.map((item) => item.date);
       const newData = reconciliationData.map((item) => item.total);
 

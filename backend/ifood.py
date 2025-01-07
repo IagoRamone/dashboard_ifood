@@ -2,16 +2,27 @@ import os
 from dotenv import load_dotenv
 import requests
 from flask import Flask, jsonify, request
+import time
 
 
 load_dotenv() 
 
 app = Flask(__name__)   
 
+cached_token = None
+token_expiration = 0 
+
 client_id = os.getenv('CLIENT_ID')
 client_secret = os.getenv('CLIENT_SECRET')
 client_credentials = os.getenv('CLIENT_CREDENTIALS')
+
 def get_access_token():
+    global cached_token, token_expiration
+
+    if cached_token and time.time() < token_expiration:
+        return cached_token
+
+
     url = 'https://merchant-api.ifood.com.br/authentication/v1.0/oauth/token'
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     data = {
@@ -19,14 +30,16 @@ def get_access_token():
         'clientId': client_id,              
         'clientSecret': client_secret 
     }
-
+    #Visibilidade de requisição
     print(f"Requesting token with: {data}")
     response = requests.post(url, data=data, headers=headers)
     print(f"Response status: {response.status_code}")  
     print(f"Response body: {response.text}")
 
     if response.status_code == 200:
-        return response.json()['access_token']
+        cached_token = response.json()['access_token']
+        token_expiration = time.time() + 10800  # 3 horas  
+        return cached_token
     else:
         raise Exception('Failed to get access token')
 
