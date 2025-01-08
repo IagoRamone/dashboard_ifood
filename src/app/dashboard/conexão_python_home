@@ -60,16 +60,12 @@ export default function Home() {
     }
   };
 
-  // Dados provisórios 
-  const provisionalLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const provisionalData = [5000, 8000, 6000, 7000, 9000, 8500, 7500, 9500, 6500, 8000, 8700, 9200];
-
   const barData = {
-    labels: labels.length > 0 ? labels : provisionalLabels,
+    labels: labels,
     datasets: [
       {
         label: 'Faturamento',
-        data: data.length > 0 ? data : provisionalData,
+        data: data,
         backgroundColor: '#4fd1c5',
       },
     ],
@@ -111,11 +107,12 @@ function Page({
   setSelectedUnit,
   fetchData,
 }: PageProps) {
+  // Dados provisórios para as opções de loja e unidade
   const stores = ["Todas", "Loja A", "Loja B", "Loja C"];
   const units = ["Todas", "Unidade 1", "Unidade 2", "Unidade 3"];
 
   return (
-    <main className="mx-auto max-w-[1500px] ml-20 p-6">
+    <main className="mx-auto max-w-[1500px] p-6">
       <section className="text-center">
         <h1 className="mb-6 text-4xl font-bold">Dashboard</h1>
       </section>
@@ -144,6 +141,7 @@ function Page({
 
       {/* Filtros */}
       <div className="my-4 flex items-center justify-center gap-4">
+        {/* Filtro de Data */}
         <div>
           <label htmlFor="competence" className="block font-bold">Data:</label>
           <input
@@ -154,6 +152,8 @@ function Page({
             className="border rounded px-4 py-2"
           />
         </div>
+
+        {/* Filtro de Loja */}
         <div>
           <label htmlFor="store" className="block font-bold">Loja:</label>
           <select
@@ -169,6 +169,8 @@ function Page({
             ))}
           </select>
         </div>
+
+        {/* Filtro de Unidade */}
         <div>
           <label htmlFor="unit" className="block font-bold">Unidade:</label>
           <select
@@ -184,6 +186,7 @@ function Page({
             ))}
           </select>
         </div>
+
         <button
           onClick={fetchData}
           className="bg-blue-500 text-white px-6 py-2 rounded"
@@ -197,7 +200,7 @@ function Page({
 
 function Dashboard({ barData, barOptions }: DashboardProps) {
   return (
-    <div className="mx-auto ml-4 max-w-[1500px] p-6">
+    <div className="mx-auto max-w-[1500px] p-6">
       <div className="mb-10">
         <Bar data={barData} options={barOptions} />
       </div>

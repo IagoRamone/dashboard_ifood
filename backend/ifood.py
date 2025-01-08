@@ -88,7 +88,6 @@ def get_settlements(merchant_id):
             'Content-Type': 'application/json'
         }
         
-
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             return jsonify(response.json()) 
@@ -98,13 +97,13 @@ def get_settlements(merchant_id):
         return jsonify({'error': str(e)}), 500
         
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
 @app.route('/')
 def home():
     return "Bem-vindo à API do iFood!"
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
 print(f'Client ID: {client_id}')
 print(f'Client Secret: {client_secret}')

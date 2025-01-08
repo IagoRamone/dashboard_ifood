@@ -11,7 +11,7 @@ export default function Header() {
               <Link href="/" className="text-white hover:text-gray-800">Home</Link>
             </li>
             <li>
-              <Link href="/dashboard" className="text-white hover:text-gray-800">Entrar</Link>
+              <Link href="/login" className="text-white hover:text-gray-800">Entrar</Link>
             </li>
             <li>
               <Link href="/about" className="text-white hover:text-gray-800">Sobre</Link>
