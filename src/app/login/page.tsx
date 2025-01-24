@@ -1,90 +1,84 @@
 'use client';
 
-import Link from 'next/link';
-import { useState } from 'react';
+import Image from "next/image";
 
-export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function Login(){
+  return(
+    <>
+    <Header/>
+    <LoginPage/>
+    </>
+  )
+}
 
-  const handleLogin = () => {
-    console.log("Email:", email, "Password:", password);
-  };
-
-  const handleRecoverPassword = () => {
-    console.log("Recuperar senha para:", email);
-  };
-
+function Header(){
+  return(
+    <header className="bg-black p-4 text-center">
+          <a href="/dashboard">
+            <Image 
+              className="ml-12"
+              src="/logo_adez.png" 
+              alt="ADEZ Logo"
+              width={150}
+              height={50}
+            />
+          </a>
+        </header>
+  )
+}
+function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
-      <div className="w-full max-w-md p-8 bg-white rounded shadow-md">
-        <h1 className="text-3xl font-bold text-center mb-6 text-black">Login</h1>
-        
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleLogin();
-          }}
-        >
-          {/* Campo de Email */}
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-bold mb-2 text-black">
-              Email
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-[350px] h-[450px]">
+        <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
+        <form action="#" method="post" className="space-y-6">
+          <div>
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+              Usuário
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              id="username"
+              name="username"
+              maxLength={8}
               required
-              placeholder="Digite seu email"
-              className="w-full px-4 py-2 border rounded bg-gray-100 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Campo de Senha */}
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-bold mb-2 text-black">
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Senha
             </label>
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              maxLength={6}
               required
-              placeholder="Digite sua senha"
-              className="w-full px-4 py-2 border rounded bg-gray-100 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          <Link href="/dashboard">
-            <button
-            type="submit"
-            className="w-full bg-[#fdd028] text-black py-2 px-4 rounded font-bold hover:bg-yellow-500 transition duration-200"
-            >
-            Entrar
-            </button>
-          </Link>
-        </form>
-
-        <div className="mt-4 text-center">
-          <button
-            onClick={handleRecoverPassword}
-            className="text-sm text-blue-500 hover:underline"
-          >
-            Esqueceu sua senha?
-          </button>
-        </div>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-700">
-            Não tem uma conta?{' '}
-            <a href="/signup" className="text-blue-500 font-bold hover:underline">
-              Cadastre-se
+          <div className="flex justify-between items-center mb-4">
+            <a href="#" className="text-sm text-blue-500 hover:underline">
+              Esqueci minha senha
             </a>
-          </p>
-        </div>
+          </div>
+
+          <button
+          type="submit"
+          className="w-full py-2 px-4 border border-black rounded-full bg-white font-semibold hover:bg-black hover:text-white transition duration-200"
+          >
+          Entrar
+          </button>
+          <a
+            href="/assets/pag/cadastro.html"
+            className="block text-center mt-4 py-2 px-4 border border-black rounded-full bg-white font-semibold text-black hover:bg-black hover:text-white transition duration-200"
+          >
+            Cadastrar
+          </a>
+        </form>
       </div>
     </div>
   );
