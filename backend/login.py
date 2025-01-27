@@ -1,36 +1,22 @@
+from flask import Flask, request, jsonify
 import mysql.connector
 from mysql.connector import Error
 
-# Configurações de conexão
+app = Flask(__name__)
+
+# Configurações do banco de dados
 host = "localhost"
 user = "root"
-password = ""  # Adicione a senha do seu MySQL se necessário
+password = "Twelve3313@"
 database = "teste_login"
 
-try:
-    # Estabelece a conexão com o banco de dados
-    connection = mysql.connector.connect(
-        host=host,
-        user=user,
-        password=password,
-        database=database
-    )
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    email = data.get("email")
+    senha = data.get("password")
 
-    if connection.is_connected():
-        print("Conexão bem-sucedida ao banco de dados")
-
-except Error as e:
-    print("Erro ao conectar ao MySQL", e)
-
-finally:
-    if connection.is_connected():
-        connection.close()
-        print("Conexão fechada")
-
-# Função para realizar o login
-def login(email, senha):
     try:
-        # Estabelece a conexão novamente para a execução do login
         connection = mysql.connector.connect(
             host=host,
             user=user,
@@ -39,25 +25,23 @@ def login(email, senha):
         )
 
         if connection.is_connected():
-            cursor = connection.cursor()
-
-            # Consulta SQL para verificar o login
+            cursor = connection.cursor(dictionary=True)
             query = "SELECT * FROM login WHERE email = %s AND senha = %s"
             cursor.execute(query, (email, senha))
-
-            # Verifica se encontrou um usuário
             result = cursor.fetchone()
+
             if result:
-                print("Login bem-sucedido!")
+                return jsonify({"message": "Login bem-sucedido!"}), 200
             else:
-                print("Email ou senha incorretos.")
+                return jsonify({"error": "Credenciais inválidas"}), 401
 
     except Error as e:
-        print("Erro ao conectar ao MySQL", e)
+        return jsonify({"error": str(e)}), 500
 
     finally:
         if connection.is_connected():
             connection.close()
 
-
-login("usuario@example.com", "senha123")
+# Inicializar o Flask
+if __name__ == "__main__":
+    app.run(debug=True)
